@@ -1,0 +1,93 @@
+<style>
+  body {
+    background-color: darkred;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  h1 {
+    color: yellow;
+  }
+
+  p {
+    font-size: 40px;
+    color: white;
+  }
+
+  h3, li {
+    color: white;
+  }
+
+  ul {
+    list-style-position: inside;
+    padding: 0;
+  }
+
+  input {
+    font-size: 18px;
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  button {
+    background-color: green;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+</style>
+
+<h1>Western Union</h1>
+<p>Balance: $<span id="bal">1000</span></p>
+
+<input id="amt" type="number" placeholder="Enter amount">
+<br>
+
+<button onclick="deposit()">Deposit</button>
+<button onclick="withdraw()">Withdraw</button>
+<button>Close</button>
+
+<h3>History</h3>
+<ul id="history"></ul>
+
+<script>
+function addHistory(text) {
+  var li = document.createElement("li");
+  li.innerText = text;
+  document.getElementById("history").prepend(li);
+}
+
+function deposit() {
+  var b = Number(document.getElementById("bal").innerText);
+  var a = Number(document.getElementById("amt").value);
+
+  if (a <= 0) {
+    alert("Enter a valid amount!");
+    return;
+  }
+
+  b = b + a;
+  document.getElementById("bal").innerText = b;
+  addHistory("Deposited $" + a);
+}
+
+function withdraw() {
+  var b = Number(document.getElementById("bal").innerText);
+  var a = Number(document.getElementById("amt").value);
+
+  if (a <= 0) {
+    alert("Enter a valid amount!");
+    return;
+  }
+
+  if (a <= b) {
+    b = b - a;
+    document.getElementById("bal").innerText = b;
+    addHistory("Withdrew $" + a);
+  } else {
+    alert("Not enough money!");
+  }
+}
+</script>
