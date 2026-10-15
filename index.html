@@ -37,22 +37,56 @@
     border-radius: 8px;
     font-size: 16px;
   }
+
+  #bank {
+    display: none;
+  }
 </style>
 
-<h1>Western Union</h1>
-<p>Balance: $<span id="bal">1000</span></p>
+<h1>Victor Bank</h1>
 
-<input id="amt" type="number" placeholder="Enter amount">
-<br>
+<div id="login">
+  <h3>Login</h3>
+  <input id="user" type="text" placeholder="Username">
+  <br>
+  <input id="pass" type="password" placeholder="Password">
+  <br>
+  <button onclick="login()">Login</button>
+</div>
 
-<button onclick="deposit()">Deposit</button>
-<button onclick="withdraw()">Withdraw</button>
-<button>Close</button>
+<div id="bank">
+  <p>Balance: $<span id="bal">1000</span></p>
 
-<h3>History</h3>
-<ul id="history"></ul>
+  <input id="amt" type="number" placeholder="Enter amount">
+  <br>
+
+  <button onclick="deposit()">Deposit</button>
+  <button onclick="withdraw()">Withdraw</button>
+  <button onclick="logout()">Logout</button>
+
+  <h3>History</h3>
+  <ul id="history"></ul>
+</div>
 
 <script>
+function login() {
+  var u = document.getElementById("user").value;
+  var p = document.getElementById("pass").value;
+
+  if (u === "victor" && p === "1234") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("bank").style.display = "block";
+  } else {
+    alert("Wrong username or password!");
+  }
+}
+
+function logout() {
+  document.getElementById("bank").style.display = "none";
+  document.getElementById("login").style.display = "block";
+  document.getElementById("pass").value = "";
+}
+
 function addHistory(text) {
   var li = document.createElement("li");
   li.innerText = text;
